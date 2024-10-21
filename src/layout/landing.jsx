@@ -1,6 +1,5 @@
 import React from "react";
 import { Button, Layout } from "antd";
-import { ArrowRightOutlined } from "@ant-design/icons";
 import logo from "../assets/landingimage/Asset 5.png";
 import fb from "../assets/landingimage/facebook-circle-logo-png.png";
 import tiktok from "../assets/landingimage/1691751429tiktok-icon-png.png";
@@ -40,15 +39,6 @@ const LandingPage = ({ children }) => {
                 designed to create conditions for students to meet, exchange
                 studies and work in groups easily and effectively.
               </p>
-              <Link to="/login">
-                <Button
-                  type="default"
-                  size="large"
-                  className="bg-orange-500 text-white mt-4 rounded-3xl transition duration-300 ease-in-out transform hover:bg-orange-600 hover:scale-110 active:scale-95 active:bg-orange-700"
-                >
-                  Sign up free <ArrowRightOutlined />
-                </Button>
-              </Link>
             </div>
             <div className="text-left my-3 space-y-3 transition duration-500 ease-in-out transform hover:translate-x-1">
               <h2 className="font-bold text-lg">GO! STUDY</h2>
