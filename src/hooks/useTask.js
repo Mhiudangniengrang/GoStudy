@@ -89,12 +89,10 @@ const useTask = create((set) => ({
   fetchGetTaskForMonth: async (userId) => {
     try {
       const res = await getTasksForMonth(userId);
-      console.log("taskformonth get success", res.data);
       if (res && res.status === 200) {
         set({ taskForMonth: res.data });
       }
     } catch (error) {
-      console.log("error gettaskformonth", error);
     }
   },
   taskForNextMonth: [],
@@ -106,7 +104,6 @@ const useTask = create((set) => ({
         set({ taskForNextMonth: res.data });
       }
     } catch (error) {
-      console.log("error gettaskfornextmonth", error);
     }
   },
   taskForPreviousMonth: [],
@@ -118,7 +115,6 @@ const useTask = create((set) => ({
         set({ taskForPreviousMonth: res.data });
       }
     } catch (error) {
-      console.log("error gettaskfornextmonth", error);
     }
   },
   fetchDeleteTask: async (taskId) => {

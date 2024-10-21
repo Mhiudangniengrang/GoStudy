@@ -7,7 +7,6 @@ const useUserHome = create((set) => ({
   fetchGetUserHome: async (userId) => {
     try {
       const res = await getUserHome(userId);
-      console.log("User Home", res.data);
       if (res && res.status === 200) {
         set({ userHome: res.data });
       }
@@ -19,7 +18,6 @@ const useUserHome = create((set) => ({
   fetchGetAll: async () => {
     try {
       const res = await getAllUser();
-      console.log("Get All", res.data);
       if (res && res.status === 200) {
         set({ getAll: res.data });
       }

@@ -4,7 +4,6 @@ import Cookies from "js-cookie";
 import { Avatar, Button, Modal, notification } from "antd";
 import * as signalR from "@microsoft/signalr";
 import useFriend from "../../hooks/useFriend";
-import useRoom from "../../hooks/useRoom";
 
 function TopRanking({ friends }) {
   const userId = Cookies.get("userId");
@@ -26,13 +25,11 @@ function TopRanking({ friends }) {
     const startConnection = async () => {
       try {
         await connection.start();
-        console.log("SignalR connected for TopRanking!");
 
         await connection.invoke("ConnectWithUserId", parseInt(userId, 10));
 
         connection.on("ReceiveOnlineUsers", (onlineUserIds) => {
           setOnlineUsers(onlineUserIds);
-          console.log("Online users received in TopRanking:", onlineUserIds);
 
           fetchGetAll();
         });
@@ -48,7 +45,6 @@ function TopRanking({ friends }) {
     return () => {
       connection
         .stop()
-        .then(() => console.log("SignalR connection stopped in TopRanking"))
         .catch((error) => console.error("Error stopping SignalR:", error));
     };
   }, [fetchGetAll, userId]);

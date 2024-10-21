@@ -187,7 +187,7 @@ function LandingUser() {
             <Button
               type="default"
               size="large"
-              className="bg-orange-500 text-white w-[45%] p-20 py-2 rounded-md"
+              className="bg-orange-500 text-white w-[45%] p-20 py-2 rounded-md custom-button1"
               onClick={handleConfirm}
             >
               Confirm
@@ -196,7 +196,7 @@ function LandingUser() {
               <Button
                 type="default"
                 size="large"
-                className="border border-orange-500 text-orange-500 w-[30%] p-20 py-2 rounded-md"
+                className="border border-orange-500 text-orange-500 w-[30%] p-20 py-2 rounded-md custom-button2"
               >
                 Skip
               </Button>

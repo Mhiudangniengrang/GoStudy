@@ -32,7 +32,6 @@ function Authen() {
       setIsLoggingIn(true);
       const response = await login(token);
       const newToken = response.data.token.accessToken;
-      console.log("token", response);
       if (typeof newToken === "string") {
         const decoded = jwtDecode(newToken);
         const userId = decoded.sid;

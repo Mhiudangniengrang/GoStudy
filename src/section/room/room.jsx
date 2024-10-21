@@ -74,7 +74,6 @@ const RoomUser = () => {
 
         connection.on("ReceiveOnlineUsers", (onlineUserIds) => {
           setOnlineUsers(onlineUserIds);
-          console.log("Received online users:", onlineUserIds);
           fetchGetAll();
         });
 
@@ -89,7 +88,6 @@ const RoomUser = () => {
     return () => {
       connection
         .stop()
-        .then(() => console.log("SignalR connection stopped"))
         .catch((error) => console.error("Error stopping SignalR:", error));
     };
   }, [fetchGetAll, userId]);

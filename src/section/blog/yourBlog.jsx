@@ -28,7 +28,7 @@ import { Cloudinary } from "@cloudinary/url-gen";
 // Create Cloudinary instance
 const cloudinary = new Cloudinary({
   cloud: {
-    cloudName: "dphupjpqt", 
+    cloudName: "dphupjpqt",
   },
 });
 
@@ -44,14 +44,14 @@ function YourBlog({ refreshYourBlog }) {
   } = useBlog();
   const [currentPage, setCurrentPage] = useState(1);
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
-  const [isImagesModalVisible, setIsImagesModalVisible] = useState(false); 
+  const [isImagesModalVisible, setIsImagesModalVisible] = useState(false);
   const [selectedPost, setSelectedPost] = useState(null);
-  const [isEditMode, setIsEditMode] = useState(false); 
-  const [images, setImages] = useState([]); 
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [images, setImages] = useState([]);
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const [comment, setComment] = useState({});
-  const [commentCount, setCommentCount] = useState(0); 
+  const [commentCount, setCommentCount] = useState(0);
   const userId = Number(Cookies.get("userId"));
   const [pageSize, setPageSize] = useState(10);
 
@@ -124,16 +124,14 @@ function YourBlog({ refreshYourBlog }) {
     }
   };
 
-  const uploadImages = async (images) => {
+  const uploadImages = async (imageFiles) => {
     try {
       const imageUrls = await Promise.all(
-        images.map(async (image, index) => {
-          // Nếu là URL, giữ nguyên không upload lại
-          if (typeof image === "object" && image.img) {
-            return image.img; // Giữ URL ảnh cũ
+        imageFiles.map(async (image) => {
+          if (image.img) {
+            return image.img;
           }
 
-          // Nếu là File, upload lên Cloudinary
           if (image instanceof File) {
             const formData = new FormData();
             formData.append("file", image);
@@ -153,14 +151,14 @@ function YourBlog({ refreshYourBlog }) {
               throw new Error(data.error.message || "Image upload failed");
             }
 
-            return data.secure_url; // Trả về URL Cloudinary cho ảnh mới
+            return data.secure_url;
           }
 
-          throw new Error(`Unsupported image type at index ${index}`);
+          throw new Error("Unsupported image type");
         })
       );
 
-      return imageUrls; // Trả về danh sách URL của ảnh cũ và ảnh mới
+      return imageUrls;
     } catch (error) {
       console.error("Error uploading images:", error);
       throw error;
@@ -205,21 +203,11 @@ function YourBlog({ refreshYourBlog }) {
   };
 
   const handleImageUpload = ({ fileList }) => {
-    const newFiles = fileList
-      .map((file) => {
-        if (file.url) {
-          return { img: file.url, uid: file.uid };
-        }
+    const newFiles = fileList.map(
+      (file) => file.originFileObj || { img: file.url, uid: file.uid }
+    );
 
-        if (file.originFileObj) {
-          return file.originFileObj;
-        }
-
-        return null; 
-      })
-      .filter(Boolean); 
-
-    setImages(newFiles); 
+    setImages(newFiles);
   };
 
   const handleCloseModals = () => {
@@ -230,7 +218,7 @@ function YourBlog({ refreshYourBlog }) {
 
   const handleImageClick = (post) => {
     setSelectedPost(post);
-    setIsImagesModalVisible(true); 
+    setIsImagesModalVisible(true);
   };
 
   const items = [
@@ -265,7 +253,7 @@ function YourBlog({ refreshYourBlog }) {
       }));
 
       setCommentCount((prevCount) => prevCount + 1);
-      await fetchGetBlog(Cookies.get("userId"), currentPage, 10); 
+      await fetchGetBlog(Cookies.get("userId"), currentPage, 10);
     } catch (error) {
       console.error("Error submitting comment:", error);
     }
@@ -482,13 +470,13 @@ function YourBlog({ refreshYourBlog }) {
                   let url;
                   if (image instanceof File) {
                     url = URL.createObjectURL(image);
-                  } else if (typeof image === "string") {
-                    url = image;
+                  } else if (image.img) {
+                    url = image.img;
                   }
 
                   return {
                     uid: index.toString(),
-                    name: image?.name || `image-${index}`,
+                    name: image.name || `image-${index}`,
                     status: "done",
                     url,
                   };

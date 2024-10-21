@@ -16,7 +16,6 @@ const useRoom = create((set) => ({
   fetchPutUrl: async (classroomId, linkUrl) => {
     try {
       const res = await putClassUrl(classroomId, linkUrl);
-      console.log("url", res);
     } catch (err) {
       console.log("put failed", err);
     }

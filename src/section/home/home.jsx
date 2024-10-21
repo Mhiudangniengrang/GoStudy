@@ -5,8 +5,6 @@ import {
   Calendar,
   theme,
   Button,
-  Dropdown,
-  Space,
   notification,
   Avatar,
 } from "antd";
@@ -20,13 +18,10 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import gao from "../assets/account/gao.png";
 import home from "../assets/account/home.png";
 import dayjs from "dayjs";
 import {
-  DownOutlined,
   EditOutlined,
-  PlusOutlined,
   FileTextOutlined,
 } from "@ant-design/icons";
 import { useNavigate } from "react-router";
@@ -38,7 +33,6 @@ import useAttendance from "../../hooks/useAttendance";
 import useUserHome from "../../hooks/useUserHome";
 import TopRanking from "./topRanking";
 
-// Register necessary components
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -81,8 +75,7 @@ function Home() {
       userHome.attendances.forEach((attendance) => {
         const dayIndex = dayjs(attendance.date).day() - 1;
         if (dayIndex >= 0 && dayIndex < 6) {
-          // Assuming attendance has a duration or start and end time to calculate hours
-          timeActive[dayIndex] += attendance.hours || 1; // Example increment
+          timeActive[dayIndex] += attendance.hours || 1; 
         }
       });
     }
@@ -126,8 +119,7 @@ function Home() {
 
   const today = new Date();
 
-  const isToday =
-    selectedDate.toDateString() === today.toDateString() ? "0" : "";
+
 
   const formatDate = (date) => {
     return dayjs(date).format("Do MMM, YYYY");
@@ -180,29 +172,22 @@ function Home() {
         });
     }
   };
-  // Kết nối với SignalR để lấy danh sách người dùng online
   useEffect(() => {
     const connection = new signalR.HubConnectionBuilder()
-      .withUrl("https://localhost:7173/userStatusHub") // URL của SignalR Hub từ backend
+      .withUrl("https://localhost:7173/userStatusHub") 
       .withAutomaticReconnect()
       .build();
 
     const startConnection = async () => {
       try {
         await connection.start();
-        console.log("SignalR connected!");
 
-        // Gọi phương thức từ backend để thông báo người dùng đã kết nối
         await connection.invoke("ConnectWithUserId", userIdd);
-        console.log(`Connected to SignalR with userId: ${userId}`);
 
-        // Lắng nghe sự kiện nhận danh sách người dùng online từ server
         connection.on("ReceiveOnlineUsers", (onlineUserIds) => {
-          setOnlineUsers(onlineUserIds); // Lưu danh sách người dùng online
-          console.log("Received online users:", onlineUserIds);
+          setOnlineUsers(onlineUserIds); 
         });
 
-        // Yêu cầu danh sách người dùng online từ server
         await connection.invoke("GetOnlineUsers");
       } catch (error) {
         console.error("Error establishing SignalR connection:", error);
@@ -214,7 +199,6 @@ function Home() {
     return () => {
       connection
         .stop()
-        .then(() => console.log("SignalR connection stopped"))
         .catch((error) =>
           console.error("Error stopping SignalR connection:", error)
         );

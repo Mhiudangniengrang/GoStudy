@@ -184,36 +184,6 @@ const RoomTask = () => {
           <p>No tasks for today</p>
         )}
       </div>
-      <div className="flex items-center justify-start text-white mt-4">
-        <Button
-          onClick={() => showModal()}
-          icon={<PlusOutlined />}
-          disabled={taskToday && taskToday.length >= 5}
-        >
-          Add task today
-        </Button>
-      </div>
-
-      <Modal
-        title={editIndex !== null ? "Edit Task" : "Create New Task"}
-        open={isModalVisible}
-        onCancel={handleCancel}
-        onOk={handleSave}
-      >
-        <Input
-          placeholder="Description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          className="mt-2"
-        />
-        <DatePicker.RangePicker
-          showTime
-          value={dateRange}
-          onChange={handleDateChange}
-          className="w-full mt-2"
-          disabledDate={disabledDate}
-        />
-      </Modal>
 
       <Modal
         title="Urgent tasks"

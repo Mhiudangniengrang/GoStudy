@@ -15,7 +15,6 @@ const useBlog = create((set) => ({
   fetchGetBlog: async (userId, pageNumber, pageSize) => {
     try {
       const res = await getBlog(userId, pageNumber, pageSize);
-      console.log("blog:", res.data.data.data);
       if (res && res.status === 200) {
         set({
           blog: res.data.data.data,
@@ -31,7 +30,6 @@ const useBlog = create((set) => ({
   fetchGetAllBlog: async ({ pageNumber }) => {
     try {
       const res = await getAllBlog({ pageNumber, pageSize: 10 });
-      console.log("API Response:", res.data.data.data);
 
       if (res && res.status === 200) {
         set({
@@ -58,7 +56,6 @@ const useBlog = create((set) => ({
   fetchPostComment: async (commentData) => {
     try {
       const response = await postCommentBlog(commentData);
-      console.log("Comment posted successfully:", response.data);
     } catch (error) {
       console.error(
         "Error posting comment:",
@@ -69,7 +66,6 @@ const useBlog = create((set) => ({
   fetchPostLike: async (blogId, userId) => {
     try {
       const response = await postLikeBlog(blogId, userId);
-      console.log("Like posted successfully:", response.data);
     } catch (error) {
       console.error(
         "Error posting like:",
@@ -103,7 +99,6 @@ const useBlog = create((set) => ({
   fetchDeleteBlog: async (postId) => {
     try {
       const response = await deleteBlogUser(postId);
-      console.log("Blog deleted successfully:", response.data);
     } catch (error) {
       console.error("Error delete blog:", error);
     }

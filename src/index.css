@@ -198,3 +198,12 @@ video {
   border-color: #f97316 !important;
   background: #f97316 !important;
 }
+.custom-button1:hover {
+  color: white !important;
+  border-color: #f97316 !important;
+  background: #f97316 !important;
+}
+.custom-button2:hover {
+  color: #f97316 !important;
+  border-color: #f97316 !important;
+}
