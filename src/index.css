@@ -1,0 +1,200 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,500;1,500&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  font-family: "Open Sans", sans-serif !important;
+  box-sizing: border-box;
+}
+body {
+  overflow-x: hidden;
+}
+@layer utilities {
+  .scrollbar,
+  #myTable {
+    &::-webkit-scrollbar {
+      width: 5px;
+      height: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #d3d3d3;
+      border-radius: 3px;
+    }
+
+    &::-webkit-scrollbar-thumb:active {
+      background-color: #c7c7c7;
+    }
+  }
+}
+.sider {
+  position: fixed !important;
+}
+
+.background {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)),
+    url("https://img.freepik.com/free-photo/gray-scale-shot-black-watch_181624-422.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+@media (max-width: 992px) {
+  .right-bar {
+    margin-left: 55px !important;
+  }
+}
+
+@media (width: 992px) {
+  .right-bar {
+    margin-left: 230px !important;
+  }
+}
+
+@media (min-width: 1100px) {
+  .general {
+    display: grid;
+    grid-column-gap: 57px !important;
+  }
+}
+
+@media (min-width: 1540px) {
+  .general {
+    display: grid;
+    gap: 120px !important;
+  }
+}
+
+@media (min-width: 1800px) {
+  .general {
+    display: grid;
+    gap: 200px !important;
+  }
+}
+
+/* .landing-page .ant-layout-header {
+  background: linear-gradient(90deg, #e0eafc, #cfdef3);
+} */
+
+/* .landing-page .ant-btn-primary {
+  background-color: #ff843a;
+  border-color: #ff843a;
+} */
+
+/* .landing-page .ant-btn-primary:hover {
+  background-color: #ff9650 !important;
+  border-color: #ff9650 !important;
+} */
+.landing-page .ant-layout-footer {
+  background-color: #f2f5f8;
+  color: #333;
+}
+video {
+  transition: opacity 2s ease-in-out;
+  opacity: 1;
+}
+
+.video-fade {
+  opacity: 0;
+}
+
+.landing-page .ant-layout-footer a {
+  color: #333;
+}
+.custom-select .ant-select-selector {
+  border-color: #034ea1 !important;
+  color: #034ea1 !important;
+}
+.color-title {
+  color: #f68442 !important;
+}
+.custom-title {
+  color: #001979 !important;
+}
+.fc .fc-button-primary {
+  background-color: #1677ff !important;
+  border-color: #1677ff;
+}
+.fc-toolbar-title {
+  font-size: 2rem !important;
+}
+.fc .fc-button:disabled {
+  opacity: 0.9;
+  border-color: #1677ff;
+}
+
+.fc .fc-button-primary:not(:disabled).fc-button-active:focus,
+.fc .fc-button-primary:not(:disabled):active:focus {
+  box-shadow: none;
+}
+
+.fc .fc-button-primary {
+  background-color: #1677ff !important;
+}
+.fc .fc-button-primary:focus {
+  box-shadow: none;
+}
+
+.fc-today-button fc-button fc-button-primary {
+  box-shadow: none;
+}
+.marquee-container {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.marquee {
+  display: flex;
+  animation: marquee 20s linear infinite;
+}
+
+.marquee.delay {
+  animation-delay: 1s; /* Điều chỉnh độ trễ để tạo sự lệch */
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+.custom-modal .ant-modal-content {
+  border: 2px solid orange;
+  border-radius: 8px;
+}
+
+.QajuHzlZleFtiTUp_E8u .D9WLyEQaARfWqCTyVrpU {
+  height: 320px;
+  padding: 20px !important;
+}
+.QajuHzlZleFtiTUp_E8u .pOvRwHj19chJGkgemUH3 ._M8cCug8H18ALQ05cNMt {
+  font-size: 1.5rem;
+}
+.fc .fc-button-primary:not(:disabled).fc-button-active,
+.fc .fc-button-primary:not(:disabled):active {
+  border: rgb(173, 168, 168) !important;
+}
+.fc .fc-button {
+  border: rgb(222, 194, 194) !important;
+}
+.D9WLyEQaARfWqCTyVrpU {
+  padding: 10px !important;
+  display: flex !important;
+  justify-content: center !important;
+  margin: 100px;
+}
+.zzHlKp_IVmgXBPV3Jv58 {
+  margin-top: -120px !important;
+}
+.j9ygOVxEl2nClTPs77Ta {
+  padding: 50px !important;
+}
+.custom-button:hover {
+  color: white !important;
+  border-color: #f97316 !important;
+  background: #f97316 !important;
+}
