@@ -103,7 +103,6 @@ function LandingUser() {
     fetchGetSpecialization();
     fetchUserInfo(userId);
   }, [fetchGetSpecialization, fetchUserInfo, userId]);
-  console.log("check", infoUser.specialization);
 
   const handleConfirm = () => {
     if (infoUser.specialization.length >= 6) {

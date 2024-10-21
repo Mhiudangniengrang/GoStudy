@@ -6,7 +6,6 @@ const useSpecialization = create((set) => ({
   fetchGetSpecialization: async () => {
     try {
       const res = await getSpecialization();
-      console.log("getSpecial", res.data);
       if (res && res.status === 200) {
         set({ specialization: res.data });
       }

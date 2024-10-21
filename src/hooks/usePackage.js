@@ -6,7 +6,6 @@ const usePackage = create((set) => ({
   fetchGetPackage: async () => {
     try {
       const res = await getPackage();
-      console.log("res", res.data);
       if (res && res.status === 200) {
         set({ packages: res.data });
       }
