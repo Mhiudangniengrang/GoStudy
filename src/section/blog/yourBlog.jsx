@@ -201,13 +201,54 @@ function YourBlog({ refreshYourBlog }) {
       setLoading(false);
     }
   };
-
-  const handleImageUpload = ({ fileList }) => {
+  const handleImageUpload = async ({ fileList }) => {
     const newFiles = fileList.map(
       (file) => file.originFileObj || { img: file.url, uid: file.uid }
     );
 
-    setImages(newFiles);
+    try {
+      // Upload all new images to Cloudinary and get the secure URLs
+      const uploadedImages = await Promise.all(
+        newFiles.map(async (file) => {
+          if (file.img) {
+            // If the image already has a URL, it's an existing image
+            return { img: file.img, uid: file.uid };
+          } else if (file instanceof File) {
+            // If it's a new file, upload it to Cloudinary
+            const formData = new FormData();
+            formData.append("file", file);
+            formData.append("upload_preset", "ml_default");
+
+            const response = await fetch(
+              "https://api.cloudinary.com/v1_1/dphupjpqt/image/upload",
+              {
+                method: "POST",
+                body: formData,
+              }
+            );
+
+            const data = await response.json();
+            if (!response.ok) {
+              throw new Error(data.error.message || "Image upload failed");
+            }
+
+            return { img: data.secure_url, uid: file.uid };
+          }
+
+          throw new Error("Unsupported image type");
+        })
+      );
+
+      // Update state with newly uploaded images
+      setImages(uploadedImages);
+    } catch (error) {
+      console.error("Error uploading images:", error);
+      notification.error({
+        message: "Upload failed",
+        description: "There was an error uploading your images.",
+        duration: 2,
+      });
+    }
   };
 
   const handleCloseModals = () => {
