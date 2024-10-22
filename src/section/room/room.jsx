@@ -61,7 +61,7 @@ const RoomUser = () => {
 
   useEffect(() => {
     const connection = new signalR.HubConnectionBuilder()
-      .withUrl("https://gostudy-be.arisavinh.dev/userStatusHub")
+      .withUrl("https://go-study-chi.vercel.app/userStatusHub")
       .withAutomaticReconnect()
       .build();
 
@@ -395,7 +395,7 @@ const RoomUser = () => {
       </div>
 
       {/* Right Sidebar */}
-      <div className="w-full md:w-1/5 py-6 space-y-8 mx-5">
+      <div className="w-full md:w-1/5 py-6 space-y-8 ">
         {/* New Members Section */}
         <div>
           <div className="flex justify-center mb-5">
@@ -432,7 +432,7 @@ const RoomUser = () => {
                           "https://via.placeholder.com/240"
                         }
                         alt={participant.fullName || "Unknown"}
-                        className="w-8 h-8 md:w-10 md:h-10 rounded-full mr-2"
+                        className="w-8 h-8 md:w-10 md:h-10 rounded-full "
                         size="small"
                       />
                       <div className="ml-2">

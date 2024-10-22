@@ -8,16 +8,10 @@ import {
   Unauthorized,
 } from "../components";
 import LandingPage from "../layout/landing";
-import { LandingUserView, LandingView } from "../section/landing/view";
 import LandingPageUser from "../layout";
 import AdminLayout from "../layout/admin";
-import DashboardPage from "../pages/DashboardPage";
 import { UserView } from "../section/admin/User/view";
-import { RoomViewList } from "../section/admin/RoomManage/view";
-import { PaymentView } from "../section/admin/Payment/view";
-import RoomZego from "../section/room/roomZego";
 import useAuthen from "../hooks/useAuthen";
-import PaymentResult from "../section/payment/paymentResult";
 
 lazy(() => import("../pages/Authentication"));
 export const PaymentPage = lazy(() => import("../pages/PaymentPage"));
@@ -31,6 +25,22 @@ export const ProfilePage = lazy(() => import("../pages/ProfilePage"));
 export const CalendarPage = lazy(() => import("../pages/CalendarPage"));
 export const PricingPage = lazy(() => import("../pages/PricingPage"));
 export const FocusPage = lazy(() => import("../pages/FocusPage"));
+export const DashboardPage = lazy(() => import("../pages/DashboardPage"));
+export const RoomZego = lazy(() => import("../section/room/roomZego"));
+export const PaymentResult = lazy(() =>
+  import("../section/payment/paymentResult")
+);
+export const RoomViewList = lazy(() =>
+  import("../section/admin/RoomManage/view/RoomViewList")
+);
+export const LandingView = lazy(() =>
+  import("../section/landing/view/landingView")
+);
+export const LandingUserView = lazy(() =>
+  import("../section/landing/view/landingUserView")
+);
+export const PaymentView = lazy(()=>import("../section/admin/Payment/view/PaymentView"))
+
 export const Router = () => {
   const { isAuthenticated, infoUser } = useAuthen();
   const specialization = infoUser.specialization;
