@@ -25,7 +25,7 @@ function FocusSpace() {
   const [volume, setVolume] = useState(0.5);
   const [backgroundClass, setBackgroundClass] = useState("");
   const [selectedBackground, setSelectedBackground] = useState(
-    "https://storage.cloud.google.com/go_study/music/Background1.1%20-%20Made%20with%20Clipchamp.mp4"
+    "https://storage.googleapis.com/go_study/music/Background1.1%20-%20Made%20with%20Clipchamp.mp4"
   );
   const [focusTime, setFocusTime] = useState(1);
   const [breakTime, setBreakTime] = useState(1);
@@ -54,38 +54,38 @@ function FocusSpace() {
   const musicOptions = [
     {
       name: "lofi-orchestra",
-      src: "https://storage.cloud.google.com/go_study/music/lofi-orchestra-162306.mp3",
+      src: "https://storage.googleapis.com/go_study/music/lofi-orchestra-162306.mp3",
     },
     {
       name: "lofi-song-jinsei",
-      src: "https://storage.cloud.google.com/go_study/music/lofi-song-jinsei-by-lofium-236730.mp3",
+      src: "https://storage.googleapis.com/go_study/music/lofi-song-jinsei-by-lofium-236730.mp3",
     },
     {
       name: "lofi-song-room",
-      src: "https://storage.cloud.google.com/go_study/music/lofi-song-room-by-lofium-242714.mp3",
+      src: "https://storage.googleapis.com/go_study/music/lofi-song-room-by-lofium-242714.mp3",
     },
     {
       name: "playa-del-sol-latin",
-      src: "https://storage.cloud.google.com/go_study/music/playa-del-sol-latin-lofi-160149.mp3",
+      src: "https://storage.googleapis.com/go_study/music/playa-del-sol-latin-lofi-160149.mp3",
     },
     {
       name: "satisfying-lofi-for-focus",
-      src: "https://storage.cloud.google.com/go_study/music/satisfying-lofi-for-focus-study-amp-working-242103.mp3",
+      src: "https://storage.googleapis.com/go_study/music/satisfying-lofi-for-focus-study-amp-working-242103.mp3",
     },
   ];
 
   const backgroundOptions = [
     {
       name: "Magic Bookstore in the Woods",
-      src: "https://storage.cloud.google.com/go_study/music/Background1.1%20-%20Made%20with%20Clipchamp.mp4",
+      src: "https://storage.googleapis.com/go_study/music/Background1.1%20-%20Made%20with%20Clipchamp.mp4",
     },
     {
       name: "Cozy Farm House",
-      src: "https://storage.cloud.google.com/go_study/music/Background2.2%20-%20Made%20with%20Clipchamp.mp4",
+      src: "https://storage.googleapis.com/go_study/music/Background2.2%20-%20Made%20with%20Clipchamp.mp4",
     },
     {
       name: "Cozy Fairy Fottage",
-      src: "https://storage.cloud.google.com/go_study/music/Background3.3%20-%20Made%20with%20Clipchamp.mp4",
+      src: "https://storage.googleapis.com/go_study/music/Background3.3%20-%20Made%20with%20Clipchamp.mp4",
     },
   ];
 
