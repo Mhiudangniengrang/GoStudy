@@ -18,7 +18,7 @@ function TopRanking({ friends }) {
     fetchGetAll();
 
     const connection = new signalR.HubConnectionBuilder()
-      .withUrl("https://localhost:7173/userStatusHub")
+      .withUrl("https://gostudy-be.arisavinh.dev/userStatusHub")
       .withAutomaticReconnect()
       .build();
 
