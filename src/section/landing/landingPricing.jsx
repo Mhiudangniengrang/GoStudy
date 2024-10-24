@@ -58,7 +58,7 @@ function LandingPricing() {
                   {plan.price && (
                     <div className="mt-6">
                       <span className="text-4xl font-bold text-gray-900">
-                        {plan.price}
+                        {plan.price} VND
                       </span>
                       <span className="text-base font-medium text-gray-500">
                         /month
@@ -107,7 +107,6 @@ function LandingPricing() {
           </div>
         </div>
       </div>
-
     </>
   );
 }

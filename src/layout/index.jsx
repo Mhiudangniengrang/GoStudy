@@ -62,6 +62,7 @@ const LandingPageUser = ({ children }) => {
             { path: "/user/room", label: "ROOM" },
             { path: "/user/blog", label: "BLOG" },
             { path: "/user/focus-space", label: "FOCUS ROOM" },
+            { path: "/user/rules", label: "RULES" },
             { path: "/user/contact-us", label: "CONTACT US" },
           ].map((item) => (
             <Link
@@ -125,7 +126,9 @@ const LandingPageUser = ({ children }) => {
             <div className="text-left my-3 space-y-2 md:space-y-3">
               <h2 className="font-bold text-sm md:text-lg">About us</h2>
               <p className="text-xs md:text-sm">Hotline: (+84) 34 264 0809</p>
-              <p className="text-xs md:text-sm">Email: gostudy.go01@gmail.com</p>
+              <p className="text-xs md:text-sm">
+                Email: gostudy.go01@gmail.com
+              </p>
               <p className="text-xs md:text-sm">
                 Address: Lot E2a-7, Street D1, Long Thanh My, Thu Duc City, Ho
                 Chi Minh City 700000, Vietnam
@@ -157,7 +160,9 @@ const LandingPageUser = ({ children }) => {
           </div>
 
           <div className="mt-8 border-t border-gray-300 pt-4">
-            <p className="text-xs md:text-sm">© 2024 Welcome. All rights reserved.</p>
+            <p className="text-xs md:text-sm">
+              © 2024 Welcome. All rights reserved.
+            </p>
             <p className="text-xs md:text-sm">
               <a
                 href="#"

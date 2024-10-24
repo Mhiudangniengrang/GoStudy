@@ -12,7 +12,7 @@ const { Title, Paragraph } = Typography;
 
 function Rules() {
   return (
-    <div className="max-w-6xl mx-auto p-6 bg-[#f7f7f7] rounded-lg shadow-lg">
+    <div className="max-w-6xl mx-auto p-6 bg-[#ffffff] rounded-lg shadow-lg mt-5 border border-orange-500">
       <div className=" p-5 rounded-lg mb-6 text-center ">
         <Title level={2} className="color-title">
           <CrownOutlined className="mr-2 text-[#E56112] text-4xl" />

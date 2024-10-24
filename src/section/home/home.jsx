@@ -213,7 +213,7 @@ function Home() {
 
   return (
     <div className="flex flex-col items-center space-y-6 mb-5">
-      <div className="flex justify-between w-full max-w-7xl mt-5">
+      <div className="flex justify-between w-full max-w-[75rem] mt-5">
         <div className="flex-col">
           <div className="p-4 flex mx-auto bg-[#BFDDFF] rounded-lg shadow-lg relative space-x-5 h-[15rem]">
             <Image
@@ -245,7 +245,7 @@ function Home() {
               <h3 className="text-xl font-bold mb-2">Time Active</h3>
               <Bar data={data} options={options} />
             </div>
-            <div className="bg-gradient-to-t from-[#C8E2FF] to-white p-4 rounded-lg shadow-md text-center w-[13rem] h-[18rem] mt-5">
+            <div className="bg-gradient-to-t from-[#C8E2FF] to-white p-4 rounded-lg shadow-md text-center w-[13rem] h-[18rem] mt-5 ">
               <div className="flex justify-center">
                 <img src={home} alt="Upgrade Icon" />
               </div>
@@ -286,10 +286,10 @@ function Home() {
                       className="mb-4 h-20"
                     />
                   </div>
-                  <h3 className="font-bold text-lg">Upcoming QBR</h3>
+                  <h3 className="font-bold text-lg">Calendar</h3>
                   <p className="text-blue-600">{formatDate(today)}</p>
                   <button className="mt-4 bg-orange-500 text-white py-2 px-4 rounded-full">
-                    Send RSVP
+                    Today
                   </button>
                 </div>
               </div>
