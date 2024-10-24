@@ -45,6 +45,52 @@ function Blog() {
 
   const showModal = () => setVisible(true);
 
+  const handleOk = async () => {
+    if (!content.trim()) {
+      message.error("Content cannot be empty.");
+      return;
+    }
+    // if (images.length === 0) {
+    //   message.error("Please provide at least one image or a string.");
+    //   return;
+    // }
+
+    const userId = Cookies.get("userId");
+    if (!userId) {
+      message.error("User ID not found. Please log in again.");
+      return;
+    }
+
+    try {
+      setLoading(true);
+      const imageUrls = await uploadImages(images);
+
+      const blogData = {
+        title: "Sample Title",
+        content: content,
+        images: imageUrls,
+      };
+
+      await fetchPostBlogVip(userId, blogData);
+      notification.success({
+        message: "Create Successful",
+        description: "You have posted successfully.",
+        duration: 2,
+      });
+
+      setRefreshTrending((prev) => !prev);
+      setRefreshYourBlog((prev) => !prev);
+      resetForm();
+    } catch (error) {
+      message.error(
+        "Error posting blog: " + (error.response?.data || error.message)
+      );
+      console.error("Error posting blog:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const uploadImages = async (images) => {
     try {
       const imageUrls = await Promise.all(
@@ -86,53 +132,6 @@ function Blog() {
     }
   };
 
-  const handleOk = async () => {
-    if (!content.trim()) {
-      message.error("Content cannot be empty.");
-      return;
-    }
-    if (images.length === 0) {
-      message.error("Please upload at least one image.");
-      return;
-    }
-
-    const userId = Cookies.get("userId");
-    if (!userId) {
-      message.error("User ID not found. Please log in again.");
-      return;
-    }
-
-    try {
-      setLoading(true);
-      const imageUrls = await uploadImages(images);
-      console.log("Images uploaded successfully:", imageUrls);
-
-      const blogData = {
-        title: "Sample Title",
-        content: content,
-        images: imageUrls,
-      };
-
-      await fetchPostBlogVip(userId, blogData);
-      notification.success({
-        message: "Create Successful",
-        description: "You have posted successfully.",
-        duration: 2,
-      });
-
-      setRefreshTrending((prev) => !prev);
-      setRefreshYourBlog((prev) => !prev);
-      resetForm();
-    } catch (error) {
-      message.error(
-        "Error posting blog: " + (error.response?.data || error.message)
-      );
-      console.error("Error posting blog:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   const resetForm = () => {
     setVisible(false);
     setContent("");
@@ -143,11 +142,9 @@ function Blog() {
     const newImages = await Promise.all(
       fileList.map(async (file) => {
         if (file.url) {
-          // If file already has a URL, it's already uploaded
           return file.url;
         }
         if (file.originFileObj) {
-          // Upload file to Cloudinary if it's a new file
           const formData = new FormData();
           formData.append("file", file.originFileObj);
           formData.append("upload_preset", "ml_default");
@@ -174,7 +171,6 @@ function Blog() {
       })
     );
 
-    // Update state with Cloudinary URLs only
     setImages(newImages.filter((url) => url !== null));
   };
 
@@ -265,7 +261,9 @@ function Blog() {
               />
             </div>
             <div className="w-full mb-4">
-              <label className="block mb-2">Add images</label>
+              <label className="block mb-2">
+                Add images or provide a string
+              </label>
               <Upload
                 accept=".jpg,.jpeg,.png"
                 listType="picture-card"

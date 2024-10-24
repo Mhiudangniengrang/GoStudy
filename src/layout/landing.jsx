@@ -67,21 +67,21 @@ const LandingPage = ({ children }) => {
                 City, Ho Chi Minh City 700000, Vietnam
               </p>
               <div className="flex space-x-4 mt-4">
-                <a href="https://www.facebook.com/profile.php?id=100036066884308">
+                <a href="https://www.facebook.com/GoStudynumber1">
                   <img
                     src={fb}
                     alt="Facebook"
                     className="w-8 h-8 transition duration-300 ease-in-out transform hover:scale-110"
                   />
                 </a>
-                <a href="https://www.tiktok.com/@_dmhieu12_">
+                <a href="https://www.tiktok.com/@go.study21">
                   <img
                     src={tiktok}
                     alt="TikTok"
                     className="w-8 h-8 transition duration-300 ease-in-out transform hover:scale-110"
                   />
                 </a>
-                <a href="https://www.instagram.com/wynhhs._hyuss/">
+                <a href="https://www.instagram.com/gostudy_go01/">
                   <img
                     src={insta}
                     alt="Instagram"

@@ -212,8 +212,8 @@ function Home() {
     userHome?.listFriend?.map((friend) => friend.myFriend.userId) || [];
 
   return (
-    <div className="flex flex-col items-center space-y-6 p-6 mb-5">
-      <div className="flex justify-between w-full max-w-6xl">
+    <div className="flex flex-col items-center space-y-6 mb-5">
+      <div className="flex justify-between w-full max-w-7xl mt-5">
         <div className="flex-col">
           <div className="p-4 flex mx-auto bg-[#BFDDFF] rounded-lg shadow-lg relative space-x-5 h-[15rem]">
             <Image

@@ -157,7 +157,7 @@ function LandingUser() {
         <div className="mx-auto lg:mx-27 text-center lg:text-left">
           <h1 className="text-5xl font-bold text-blue-900">Welcome to</h1>
           <div className="mx-8">
-            <p className="text-8xl mt-4 font-semibold">
+            <p className="text-5xl lg:text-8xl mt-4 font-semibold">
               <span className="text-orange-500">Go! </span>
               <span className="text-blue-900">Study</span>
             </p>
@@ -166,11 +166,20 @@ function LandingUser() {
             <Select
               mode="multiple"
               placeholder="Choose your majors"
-              className="w-full lg:w-4/5 text-center custom-select"
+              className="w-full lg:w-4/5 text-center "
               size="large"
               value={selectedMajors}
-              onChange={setSelectedMajors}
-              maxTagCount={2}
+              onChange={(value) => {
+                if (value.length <= 6) {
+                  setSelectedMajors(value);
+                } else {
+                  notification.warning({
+                    message: "Room Limit Reached",
+                    description: "You can only select up to 6 rooms.",
+                  });
+                }
+              }}
+              maxTagCount={1}
               maxTagPlaceholder={(omittedValues) =>
                 `+${omittedValues.length} more`
               }
@@ -186,7 +195,7 @@ function LandingUser() {
             <Button
               type="default"
               size="large"
-              className="bg-orange-500 text-white w-[45%] p-20 py-2 rounded-md custom-button1"
+              className="bg-orange-500 text-white w-full lg:w-[50%] p-4 py-2 rounded-md custom-button1"
               onClick={handleConfirm}
             >
               Confirm
@@ -195,7 +204,7 @@ function LandingUser() {
               <Button
                 type="default"
                 size="large"
-                className="border border-orange-500 text-orange-500 w-[30%] p-20 py-2 rounded-md custom-button2"
+                className="border border-orange-500 text-orange-500 w-full lg:w-[200%] p-4 py-2 rounded-md custom-button2"
               >
                 Skip
               </Button>
@@ -217,14 +226,14 @@ function LandingUser() {
           <div key={video.id}>
             <img
               src={video.image}
-              alt=""
-              className="w-full h-[45rem] object-cover"
+              alt="carousel-item"
+              className="w-full h-[20rem] lg:h-[45rem] object-cover"
             />
           </div>
         ))}
       </Carousel>
-      <div className="pt-16 px-8 bg-white text-center">
-        <h3 className="text-4xl text-orange-500 mb-6">
+      <div className="pt-16 px-4 lg:px-8 bg-white text-center">
+        <h3 className="text-2xl lg:text-4xl text-orange-500 mb-6">
           Loved by FPT University students!
         </h3>
         <Button className="bg-white border border-blue-500 text-blue-500 px-4 rounded-full">
@@ -254,7 +263,7 @@ function LandingUser() {
                   </div>
                   <div className="relative mt-8 flex items-center gap-x-4">
                     <img
-                      alt=""
+                      alt="author"
                       src={post.author.imageUrl}
                       className="h-10 w-10 rounded-full bg-gray-50"
                     />

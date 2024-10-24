@@ -203,15 +203,7 @@ const FocusTimer = ({
             </div>
           </div>
 
-          <div className="flex items-center justify-between mb-4">
-            <label className="text-sm">Loop automatically</label>
-            <input
-              type="checkbox"
-              checked={isLoop}
-              onChange={() => setIsLoop(!isLoop)}
-              className="w-5 h-5 rounded focus:outline-none"
-            />
-          </div>
+    
 
           <button
             onClick={() => setIsTimerRunning(true)}

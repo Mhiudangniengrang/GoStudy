@@ -270,7 +270,7 @@ const RoomUser = () => {
     <div className="flex flex-col md:flex-row min-h-screen">
       {/* Sidebar */}
       <div className="w-full md:w-1/5 bg-white p-5">
-        <div className="bg-gradient-to-t from-[#C8E2FF] to-white p-4 rounded-lg shadow-md text-center w-full h-80 mt-5">
+        <div className="bg-gradient-to-t from-[#C8E2FF] to-white p-4 rounded-lg shadow-md text-center w-full h-90 mt-5">
           <div className="flex justify-center">
             <img src={home} alt="Upgrade Icon" />
           </div>
@@ -317,7 +317,7 @@ const RoomUser = () => {
 
       {/* Main Content */}
       <div className="w-full md:w-3/5 p-4">
-        <div className="mb-4 p-4 rounded-lg bg-gradient-to-r from-[#5088FF] to-[#DAE5FF] flex items-center">
+        <div className="mb-4 p-4 rounded-lg bg-gradient-to-r from-[#5088FF] to-[#DAE5FF] flex flex-col md:flex-row items-center">
           <img src={room} alt="Study Image" className="w-32 h-32 mr-4" />
           <div className="space-y-3">
             <h2 className="text-2xl md:text-4xl font-medium text-[#034EA1]">
@@ -444,7 +444,7 @@ const RoomUser = () => {
                         </p>
                       </div>
                     </div>
-                    <div className="flex flex-col items-center">
+                    <div className="flex flex-col items-center mr-3">
                       <span
                         className={`w-3 h-3 rounded-full ${
                           isOnline ? "bg-green-500" : "bg-red-500"
@@ -474,45 +474,28 @@ const RoomUser = () => {
                   >
                     <div className="flex items-center">
                       <Avatar
-                        size="small"
-                        src={user.profileImage}
-                        alt={`${user.fullName}'s profile`}
-                        className="w-8 h-8 md:w-10 md:h-10 rounded-full mr-2"
+                        size="large"
+                        src={
+                          user.profileImage || "https://via.placeholder.com/240"
+                        }
                       />
-                      <div>
-                        <span className="font-bold text-xs md:text-sm text-orange-500">
+                      <div className="ml-2">
+                        <div className="font-bold text-base">
                           {user.fullName}
-                        </span>
-                        <p className="text-xs md:text-sm text-gray-600">
+                        </div>
+                        <div className="text-gray-500 text-sm">
                           {user.email}
-                        </p>
+                        </div>
                       </div>
                     </div>
-                    <span
-                      className={`w-2 h-2 md:w-3 md:h-3 rounded-full bg-green-500`}
-                    ></span>
                   </div>
                 ))
             ) : (
-              <p>No users found.</p>
+              <div className="text-gray-500">No members online</div>
             )}
           </div>
         </div>
       </div>
-
-      {/* Task Modal */}
-      <Modal
-        title={editIndex !== null ? "Edit Task" : "Add Task"}
-        open={isModalVisible}
-        onOk={handleSave}
-        onCancel={handleCancel}
-      >
-        <Input
-          value={currentTask}
-          onChange={(e) => setCurrentTask(e.target.value)}
-          placeholder="Enter your task"
-        />
-      </Modal>
     </div>
   );
 };
