@@ -426,14 +426,13 @@ const RoomUser = () => {
           </div>
         </div>
 
-        {/* Recent Activity Section */}
         <div>
           <h3 className="text-lg font-medium text-[#034EA1]">Members Online</h3>
           <div className="space-y-5 mt-4">
             {getAll && getAll.length > 0 ? (
-              getAll.map((user) => {
-                const isOnline = isUserOnline(user.userId);
-                return (
+              getAll
+                .filter((user) => isUserOnline(user.userId)) 
+                .map((user) => (
                   <div
                     key={user.userId}
                     className="flex justify-between items-center"
@@ -455,15 +454,11 @@ const RoomUser = () => {
                       </div>
                     </div>
                     <div className="flex flex-col items-center mr-3">
-                      <span
-                        className={`w-3 h-3 rounded-full ${
-                          isOnline ? "bg-green-500" : "bg-red-500"
-                        }`}
-                      ></span>
+                      {/* Hiển thị dấu tròn xanh nếu online */}
+                      <span className="w-3 h-3 rounded-full bg-green-500"></span>
                     </div>
                   </div>
-                );
-              })
+                ))
             ) : (
               <div className="text-gray-500">No members online</div>
             )}
