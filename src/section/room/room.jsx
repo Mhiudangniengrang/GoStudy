@@ -402,20 +402,20 @@ const RoomUser = () => {
                         size="small"
                       />
                       <div className="ml-2 flex flex-col">
-                        <span className="font-bold text-md">
-                          {participant.fullName || "Unknown"}
-                        </span>
+                        <div className="flex items-center">
+                          <span className="font-bold text-md">
+                            {participant.fullName || "Unknown"}
+                          </span>
+                          <span
+                            className={`ml-2 w-3 h-3 rounded-full ${
+                              isOnline ? "bg-green-500" : "bg-red-500"
+                            }`}
+                          ></span>
+                        </div>
                         <p className="text-gray-500 text-md">
                           {participant.email || "No email"}
                         </p>
                       </div>
-                    </div>
-                    <div className="flex items-center">
-                      <span
-                        className={`w-3 h-3 rounded-full ${
-                          isOnline ? "bg-green-500" : "bg-red-500"
-                        }`}
-                      ></span>
                     </div>
                   </div>
                 );
@@ -445,16 +445,16 @@ const RoomUser = () => {
                         }
                       />
                       <div className="ml-2 flex flex-col">
-                        <div className="font-bold text-base">
-                          {user.fullName}
+                        <div className="flex items-center">
+                          <span className="font-bold text-base">
+                            {user.fullName}
+                          </span>
+                          <span className="ml-2 w-3 h-3 rounded-full bg-green-500"></span>
                         </div>
                         <div className="text-gray-500 text-sm">
                           {user.email}
                         </div>
                       </div>
-                    </div>
-                    <div className="flex items-center">
-                      <span className="w-3 h-3 rounded-full bg-green-500"></span>
                     </div>
                   </div>
                 ))
