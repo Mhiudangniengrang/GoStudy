@@ -61,7 +61,7 @@ const RoomUser = () => {
 
   useEffect(() => {
     const connection = new signalR.HubConnectionBuilder()
-      .withUrl("https://go-study-chi.vercel.app/userStatusHub")
+      .withUrl("https://gostudy-be.arisavinh.dev/userStatusHub")
       .withAutomaticReconnect()
       .build();
 
