@@ -9,7 +9,7 @@ import Loading from "./components/Loading.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <GoogleOAuthProvider clientId="785556433218-hemsa8v3gk1c3o4io181as1bsvjh2hhe.apps.googleusercontent.com">
+    <GoogleOAuthProvider clientId="348458626790-jufaggnu7ljco8lpo9qksbj6e8gbvt0p.apps.googleusercontent.com">
       <BrowserRouter>
         <Suspense fallback={<Loading />}>
           <App />
