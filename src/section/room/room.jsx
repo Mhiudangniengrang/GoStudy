@@ -398,10 +398,10 @@ const RoomUser = () => {
                           "https://via.placeholder.com/240"
                         }
                         alt={participant.fullName || "Unknown"}
-                        className="w-8 h-8 md:w-10 md:h-10 rounded-full "
+                        className="w-8 h-8 md:w-10 md:h-10 rounded-full"
                         size="small"
                       />
-                      <div className="ml-2">
+                      <div className="ml-2 flex flex-col">
                         <span className="font-bold text-md">
                           {participant.fullName || "Unknown"}
                         </span>
@@ -410,7 +410,7 @@ const RoomUser = () => {
                         </p>
                       </div>
                     </div>
-                    <div className="flex flex-col items-center mr-3">
+                    <div className="flex items-center">
                       <span
                         className={`w-3 h-3 rounded-full ${
                           isOnline ? "bg-green-500" : "bg-red-500"
@@ -431,7 +431,7 @@ const RoomUser = () => {
           <div className="space-y-5 mt-4">
             {getAll && getAll.length > 0 ? (
               getAll
-                .filter((user) => isUserOnline(user.userId)) 
+                .filter((user) => isUserOnline(user.userId))
                 .map((user) => (
                   <div
                     key={user.userId}
@@ -444,7 +444,7 @@ const RoomUser = () => {
                           user.profileImage || "https://via.placeholder.com/240"
                         }
                       />
-                      <div className="ml-2">
+                      <div className="ml-2 flex flex-col">
                         <div className="font-bold text-base">
                           {user.fullName}
                         </div>
@@ -453,8 +453,7 @@ const RoomUser = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="flex flex-col items-center mr-3">
-                      {/* Hiển thị dấu tròn xanh nếu online */}
+                    <div className="flex items-center">
                       <span className="w-3 h-3 rounded-full bg-green-500"></span>
                     </div>
                   </div>
