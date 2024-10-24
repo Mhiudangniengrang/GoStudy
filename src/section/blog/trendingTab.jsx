@@ -31,6 +31,7 @@ function TrendingTab({ refreshTrending }) {
   const [comment, setComment] = useState({});
   const [commentCount, setCommentCount] = useState(0); // Track comment count
   const userId = Number(Cookies.get("userId"));
+  const [visibleComments, setVisibleComments] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
@@ -46,7 +47,12 @@ function TrendingTab({ refreshTrending }) {
     setCurrentPage(page);
     setPageSize(size);
   };
-
+  const handleShowMoreComments = (postId) => {
+    setVisibleComments((prevVisibleComments) => ({
+      ...prevVisibleComments,
+      [postId]: true,
+    }));
+  };
   const formatDate = (dateString) => {
     const options = {
       year: "numeric",
@@ -206,46 +212,86 @@ function TrendingTab({ refreshTrending }) {
                 </div>
                 <div className="my-5 space-y-3">
                   {post.comments && post.comments.length > 0 ? (
-                    post.comments.map((comment) => (
-                      <div
-                        key={comment.commentId}
-                        className="border-t border-gray-200 pt-2 mt-2"
-                      >
-                        <div className="flex items-center mb-2">
-                          {comment.user && comment.user.fullName ? (
-                            <>
-                              <Avatar
-                                size={32}
-                                src={comment.user.profileImage}
-                              />
-                              <div className="ml-2">
-                                <h3 className="font-semibold text-gray-700">
-                                  {comment.user.fullName}
-                                </h3>
-                                <p className="text-xs text-gray-500">
-                                  {comment.user.email}
-                                </p>
-                              </div>
-                            </>
-                          ) : (
-                            <div className="ml-2">
-                              <h3 className="font-semibold text-gray-700">
-                                Anonymous
-                              </h3>
-                              <p className="text-xs text-gray-500">
-                                No email provided
-                              </p>
+                    <>
+                      {post.comments
+                        .slice(
+                          0,
+                          visibleComments[post.postId]
+                            ? post.comments.length
+                            : 3
+                        )
+                        .map((comment) => (
+                          <div
+                            key={comment.commentId}
+                            className="border-t border-gray-200 pt-2 mt-2"
+                          >
+                            {/* Hiển thị chi tiết bình luận */}
+                            <div className="flex items-center mb-2">
+                              {comment.user && comment.user.fullName ? (
+                                <>
+                                  <Avatar
+                                    size={32}
+                                    src={comment.user.profileImage}
+                                  />
+                                  <div className="ml-2">
+                                    <h3 className="font-semibold text-gray-700">
+                                      {comment.user.fullName}
+                                    </h3>
+                                    <p className="text-xs text-gray-500">
+                                      {comment.user.email}
+                                    </p>
+                                  </div>
+                                </>
+                              ) : (
+                                <div className="ml-2">
+                                  <h3 className="font-semibold text-gray-700">
+                                    Anonymous
+                                  </h3>
+                                  <p className="text-xs text-gray-500">
+                                    No email provided
+                                  </p>
+                                </div>
+                              )}
                             </div>
+                            <p className="text-sm text-gray-600">
+                              {comment.content}
+                            </p>
+                            <p className="text-xs text-gray-400">
+                              {formatDate(comment.createdAt)}
+                            </p>
+                          </div>
+                        ))}
+
+                      {post.comments.length > 3 && (
+                        <div className="text-center mt-2">
+                          {visibleComments[post.postId] ? (
+                            <span
+                              className="text-sm text-blue-500 cursor-pointer"
+                              onClick={() =>
+                                setVisibleComments((prev) => ({
+                                  ...prev,
+                                  [post.postId]: false,
+                                }))
+                              }
+                            >
+                              Collapse comments
+                            </span>
+                          ) : (
+                            <span
+                              className="text-sm text-blue-500 cursor-pointer"
+                              onClick={() =>
+                                setVisibleComments((prev) => ({
+                                  ...prev,
+                                  [post.postId]: true,
+                                }))
+                              }
+                            >
+                              See more comments
+                            </span>
                           )}
                         </div>
-                        <p className="text-sm text-gray-600">
-                          {comment.content}
-                        </p>
-                        <p className="text-xs text-gray-400">
-                          {formatDate(comment.createdAt)}
-                        </p>
-                      </div>
-                    ))
+                      )}
+                    </>
                   ) : (
                     <p className="text-sm text-gray-500">No comments yet</p>
                   )}
