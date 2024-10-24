@@ -212,7 +212,7 @@ function TrendingTab({ refreshTrending }) {
                         className="border-t border-gray-200 pt-2 mt-2"
                       >
                         <div className="flex items-center mb-2">
-                          {comment.user && comment.user.userId === userId ? (
+                          {comment.user ? (
                             <>
                               <Avatar
                                 size={32}
