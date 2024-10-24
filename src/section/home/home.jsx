@@ -321,7 +321,7 @@ function Home() {
                           item.status ? "text-green-500" : "text-red-500"
                         }
                       >
-                        {item.status ? "Hoàn thành" : "Chưa hoàn thành"}
+                        {item.status ? "Complete" : "Not complete"}
                       </span>
                     </div>
                   ))

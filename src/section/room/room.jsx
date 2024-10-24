@@ -107,40 +107,6 @@ const RoomUser = () => {
     });
   };
 
-  const showModal = (task = "", index = null) => {
-    setCurrentTask(task);
-    setEditIndex(index);
-    setIsModalVisible(true);
-  };
-
-  const handleCancel = () => {
-    setIsModalVisible(false);
-    setCurrentTask("");
-    setEditIndex(null);
-  };
-
-  const handleSave = () => {
-    if (!currentTask.trim()) {
-      message.warning("Task cannot be empty");
-      return;
-    }
-
-    if (editIndex !== null) {
-      const updatedTasks = [...tasks];
-      updatedTasks[editIndex] = currentTask;
-      setTasks(updatedTasks);
-    } else if (tasks.length < 5) {
-      setTasks([...tasks, currentTask]);
-    }
-
-    handleCancel();
-  };
-
-  const handleDelete = (index) => {
-    const updatedTasks = tasks.filter((_, i) => i !== index);
-    setTasks(updatedTasks);
-  };
-
   useEffect(() => {
     if (listRoom) {
       setFriendRequests(
@@ -425,7 +391,7 @@ const RoomUser = () => {
                     key={index}
                     className="flex justify-between items-center"
                   >
-                    <div className="flex items-center">
+                    <div className="flex items-center mt-3">
                       <Avatar
                         src={
                           participant.profileImage ||

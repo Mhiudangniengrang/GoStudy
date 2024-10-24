@@ -48,14 +48,6 @@ const RoomTask = () => {
     return () => clearInterval(interval);
   }, [taskToday]);
 
-  const showModal = (task = {}, index = null) => {
-    if (index !== null) {
-      setDescription(task.description);
-      setDateRange([dayjs(task.scheduledTime), dayjs(task.scheduledEndTime)]);
-    }
-    setEditIndex(index);
-    setIsModalVisible(true);
-  };
 
   const handleCancel = () => {
     setIsModalVisible(false);
@@ -125,13 +117,6 @@ const RoomTask = () => {
     }
   };
 
-  const handleDateChange = (dates) => {
-    setDateRange(dates || []);
-  };
-
-  const disabledDate = (current) => {
-    return current && current < dayjs().startOf("day");
-  };
 
   const handleTaskClick = (task) => {
     setSelectedTask(task);
@@ -186,7 +171,7 @@ const RoomTask = () => {
       </div>
 
       <Modal
-        title="Urgent tasks"
+        title="Task Today"
         open={isTaskDetailVisible}
         onCancel={() => setIsTaskDetailVisible(false)}
         footer={null}
@@ -214,7 +199,7 @@ const RoomTask = () => {
                         : "text-red-500 font-semibold"
                     }
                   >
-                    {selectedTask.status ? "Hoàn thành" : "Chưa hoàn thành"}
+                    {selectedTask.status ? "Complete" : "Not complete"}
                   </span>
                 </div>
 
