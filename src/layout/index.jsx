@@ -35,7 +35,7 @@ const LandingPageUser = ({ children }) => {
 
   const menu = (
     <Menu>
-      {infoUser.role === 1 && (
+      {infoUser.role === 2 && (
         <Menu.Item key="admin-dashboard">
           <Link to="/admin/dashboard">Dashboard</Link>
         </Menu.Item>
