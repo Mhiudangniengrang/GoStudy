@@ -27,8 +27,8 @@ function FocusSpace() {
   const [selectedBackground, setSelectedBackground] = useState(
     "https://storage.googleapis.com/go_study/music/Background1.1%20-%20Made%20with%20Clipchamp.mp4"
   );
-  const [focusTime, setFocusTime] = useState(1);
-  const [breakTime, setBreakTime] = useState(1);
+  const [focusTime, setFocusTime] = useState(50);
+  const [breakTime, setBreakTime] = useState(5);
   const [isLoop, setIsLoop] = useState(false);
   const [isTimerRunning, setIsTimerRunning] = useState(false);
 
