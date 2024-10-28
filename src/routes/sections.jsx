@@ -39,8 +39,12 @@ export const LandingView = lazy(() =>
 export const LandingUserView = lazy(() =>
   import("../section/landing/view/landingUserView")
 );
-export const PaymentView = lazy(()=>import("../section/admin/Payment/view/PaymentView"))
-
+export const PaymentView = lazy(() =>
+  import("../section/admin/Payment/view/PaymentView")
+);
+export const LandingPricingView = lazy(() =>
+  import("../section/landing/landingPricing")
+);
 export const Router = () => {
   const { isAuthenticated, infoUser } = useAuthen();
   const specialization = infoUser.specialization;

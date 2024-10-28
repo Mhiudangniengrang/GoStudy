@@ -5,23 +5,38 @@ import {
   CheckCircleOutlined,
   VideoCameraOutlined,
   MessageOutlined,
-  MailOutlined,
 } from "@ant-design/icons";
+import { useTheme } from "../themeLightDark/ThemeProvider"; // Import useTheme
 
 const { Title, Paragraph } = Typography;
 
 function Rules() {
+  const { theme } = useTheme(); // Get current theme from context
+
+  // Define styles for light and dark themes
+  const themeStyles = {
+    backgroundColor: theme === "dark" ? "#1f1f1f" : "#ffffff",
+    color: theme === "dark" ? "#f5f5f5" : "#000000",
+    borderColor: theme === "dark" ? "#333" : "#FFA500",
+  };
+
   return (
-    <div className="max-w-6xl mx-auto p-6 bg-[#ffffff] rounded-lg shadow-lg mt-5 border border-orange-500">
-      <div className=" p-5 rounded-lg mb-6 text-center ">
-        <Title level={2} className="color-title">
-          <CrownOutlined className="mr-2 text-[#E56112] text-4xl" />
+    <div
+      className="max-w-6xl mx-auto p-6 rounded-lg shadow-lg my-5"
+      style={{ ...themeStyles, border: `1px solid ${themeStyles.borderColor}` }}
+    >
+      <div className="p-5 rounded-lg mb-6 text-center">
+        <Title level={2} style={{ color: themeStyles.color }}>
+          <CrownOutlined
+            className="mr-2"
+            style={{ color: "#E56112", fontSize: "24px" }}
+          />
           Explore, connect, and excel with Go! Study - your pathway to success!
         </Title>
       </div>
 
-      <div className="mb-6 ">
-        <Title level={3} className="custom-title">
+      <div className="mb-6">
+        <Title level={3} style={{ color: themeStyles.color }}>
           <CheckCircleOutlined className="mr-2" />
           Community Guidelines
         </Title>
@@ -33,13 +48,15 @@ function Rules() {
             "4. Manage your own experience: Block users or hide their video streams if necessary.",
             "5. Safety: Do not disclose personal information that may compromise your privacy or security.",
           ]}
-          renderItem={(item) => <List.Item>{item}</List.Item>}
+          renderItem={(item) => (
+            <List.Item style={{ color: themeStyles.color }}>{item}</List.Item>
+          )}
         />
       </div>
 
       <div className="mb-6">
-        <Title level={3} className="custom-title">
-          <CheckCircleOutlined className="mr-2 " />
+        <Title level={3} style={{ color: themeStyles.color }}>
+          <CheckCircleOutlined className="mr-2" />
           General Rules
         </Title>
         <List
@@ -85,16 +102,18 @@ function Rules() {
               fake reports, or make false allegations against others.
             </span>,
           ]}
-          renderItem={(item) => <List.Item>{item}</List.Item>}
+          renderItem={(item) => (
+            <List.Item style={{ color: themeStyles.color }}>{item}</List.Item>
+          )}
         />
       </div>
 
       <div className="mb-6">
-        <Title level={3} className="custom-title">
+        <Title level={3} style={{ color: themeStyles.color }}>
           <VideoCameraOutlined className="mr-2" />
           Focus Room Rules
         </Title>
-        <Paragraph>
+        <Paragraph style={{ color: themeStyles.color }}>
           Video conduct: Avoid intentionally distracting, inappropriate,
           disruptive, and offensive behavior and presentation. This includes
           clothing, backgrounds, filters, tile messages, and audio (where it's
@@ -103,7 +122,7 @@ function Rules() {
       </div>
 
       <div className="mb-6">
-        <Title level={3} className="custom-title">
+        <Title level={3} style={{ color: themeStyles.color }}>
           <MessageOutlined className="mr-2" />
           Chat Rules
         </Title>
@@ -112,16 +131,18 @@ function Rules() {
             '1. No inappropriate messaging: No unwelcome, spamming, or "creeping" messages. No profanity.',
             "2. Language: Please use English in all public spaces unless stated otherwise in designated spaces.",
           ]}
-          renderItem={(item) => <List.Item>{item}</List.Item>}
+          renderItem={(item) => (
+            <List.Item style={{ color: themeStyles.color }}>{item}</List.Item>
+          )}
         />
       </div>
 
       <div className="mb-6">
-        <Paragraph>
+        <Paragraph style={{ color: themeStyles.color }}>
           <strong>Talk to us:</strong> To speak to the moderation team or query
           a moderation decision, please email gostudy.go01@gmail.com
         </Paragraph>
-        <Paragraph>
+        <Paragraph style={{ color: themeStyles.color }}>
           <strong>Disclaimer:</strong> Moderators reserve the right to modify
           rules and exercise any moderation action deemed necessary at all
           times.

@@ -8,6 +8,8 @@ import { Link, useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import useAuthen from "../hooks/useAuthen";
 import Cookies from "js-cookie";
+import DarkMode from "../section/DarkMode/DarkMode";
+import { useTheme } from "../section/themeLightDark/ThemeProvider"; // Import useTheme
 
 const { Header, Footer, Content } = Layout;
 
@@ -19,6 +21,7 @@ const LandingPageUser = ({ children }) => {
   const { isAuthenticated, infoUser, fetchUserInfo } = useAuthen();
   const avatarUrl = infoUser.profileImage || "";
   const userName = infoUser.fullName || "";
+  const { theme } = useTheme(); // Lấy theme hiện tại từ context
 
   useEffect(() => {
     const userId = Cookies.get("userId");
@@ -35,7 +38,7 @@ const LandingPageUser = ({ children }) => {
 
   const menu = (
     <Menu>
-      {infoUser.role === 2 && (
+      {infoUser.role === 1 && (
         <Menu.Item key="admin-dashboard">
           <Link to="/admin/dashboard">Dashboard</Link>
         </Menu.Item>
@@ -52,7 +55,11 @@ const LandingPageUser = ({ children }) => {
   return (
     <Layout className="landing-page min-h-screen bg-white">
       {/* Header */}
-      <Header className="sticky top-0 z-50 bg-gradient-to-t from-[#D7DDFF] to-white p-4 md:p-12 shadow-md flex justify-between items-center rounded-b-3xl">
+      <Header
+        className={`sticky top-0 z-50 p-4 md:p-12 shadow-md flex justify-between items-center  ${
+          theme === "dark" ? "header-dark" : "header-light"
+        }`}
+      >
         <Link to="/user">
           <img src={logo} alt="Go Study Logo" className="h-8 md:h-10" />
         </Link>
@@ -76,7 +83,8 @@ const LandingPageUser = ({ children }) => {
             </Link>
           ))}
         </div>
-        <div className="flex items-center">
+        <div className="flex items-center space-x-4">
+          <DarkMode />
           <Dropdown overlay={menu} trigger={["click"]}>
             <Avatar src={avatarUrl} size="large" className="cursor-pointer" />
           </Dropdown>
@@ -87,7 +95,11 @@ const LandingPageUser = ({ children }) => {
       <Content className="">{children}</Content>
 
       {/* Footer */}
-      <Footer className="bg-gradient-to-t from-blue-200 to-white py-8 px-4 text-center">
+      <Footer
+        className={`py-8 px-4 text-center ${
+          theme === "dark" ? "footer-dark" : "footer-light"
+        }`}
+      >
         <div className="mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-5">
             <div className="text-left mb-4">
@@ -166,14 +178,18 @@ const LandingPageUser = ({ children }) => {
             <p className="text-xs md:text-sm">
               <a
                 href="#"
-                className="text-blue-600 transition duration-300 ease-in-out transform hover:text-blue-800"
+                className={`transition duration-300 ease-in-out transform hover:text-blue-800 ${
+                  theme === "dark" ? "link-dark" : "link-light"
+                }`}
               >
                 Privacy Policy
               </a>{" "}
               |{" "}
               <a
                 href="#"
-                className="text-blue-600 transition duration-300 ease-in-out transform hover:text-blue-800"
+                className={`transition duration-300 ease-in-out transform hover:text-blue-800 ${
+                  theme === "dark" ? "link-dark" : "link-light"
+                }`}
               >
                 Terms of Service
               </a>

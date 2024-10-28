@@ -7,8 +7,22 @@
   font-family: "Open Sans", sans-serif !important;
   box-sizing: border-box;
 }
+
+:root {
+  --body_color: black;
+  --link_color: navy;
+}
+
+[data-theme="dark"] {
+  --body_background: #282c34 !important;
+  --body_color: white;
+  --link_color: cyan;
+}
+
 body {
   overflow-x: hidden;
+  background-color: var(--body_background) !important;
+  color: var(--body_color);
 }
 @layer utilities {
   .scrollbar,
@@ -207,4 +221,3 @@ video {
   color: #f97316 !important;
   border-color: #f97316 !important;
 }
-

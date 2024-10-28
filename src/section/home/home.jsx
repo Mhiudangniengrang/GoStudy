@@ -347,14 +347,14 @@ function Home() {
           </div>
           <div className="mt-3">
             <div className="flex justify-between">
-              <h2 className="font-bold text-lg">Blog</h2>
+              <h2 className="font-bold text-lg mb-2">Blog</h2>
               <Link to="/user/blog" className="text-blue-500 font-bold">
                 View All
               </Link>
             </div>
             <div className="flex space-x-4">
               <div className="bg-[#F5F5F5] p-5 rounded shadow-md w-60">
-                <h3 className="text-sm font-bold">{userHome.fullName}</h3>
+                <h3 className="text-sm font-bold ">{userHome.fullName}</h3>
                 <div className="flex items-center text-gray-500">
                   <span>
                     {userHome.blogPost
@@ -379,7 +379,7 @@ function Home() {
           <div className="flex space-x-5 my-5">
             <div className="w-[22rem]">
               <div className="flex justify-between">
-                <h2 className="text-lg font-bold mb-4">Friend</h2>
+                <h2 className="text-lg font-bold mb-2">Friend</h2>
               </div>
               <div className="space-y-2">
                 {userHome.listFriend && userHome.listFriend.length > 0 ? (

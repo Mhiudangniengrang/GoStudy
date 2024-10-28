@@ -152,7 +152,7 @@ function LandingUser() {
   };
 
   return (
-    <>
+    <div>
       <div className="flex flex-col lg:flex-row justify-between mt-10 bg-white">
         <div className="mx-auto lg:mx-27 text-center lg:text-left">
           <h1 className="text-5xl font-bold text-blue-900">Welcome to</h1>
@@ -232,14 +232,14 @@ function LandingUser() {
           </div>
         ))}
       </Carousel>
-      <div className="pt-16 px-4 lg:px-8 bg-white text-center">
+      <div className="pt-16 px-4 lg:px-8  text-center">
         <h3 className="text-2xl lg:text-4xl text-orange-500 mb-6">
           Loved by FPT University students!
         </h3>
         <Button className="bg-white border border-blue-500 text-blue-500 px-4 rounded-full">
           See all stories →
         </Button>
-        <div className="bg-white">
+        <div className="">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-gray-200 pt-10 lg:mx-0 lg:max-w-none lg:grid-cols-3">
               {posts.map((post) => (
@@ -315,7 +315,7 @@ function LandingUser() {
         </div>
       </div>
       {/* Trusted by Creators Section */}
-      <div className="bg-white py-16 px-4">
+      <div className=" py-16 px-4">
         <div className="max-w-7xl mx-auto text-center">
           <h2 className="text-3xl font-bold text-gray-900">
             Join 500+ users today{" "}
@@ -348,7 +348,7 @@ function LandingUser() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

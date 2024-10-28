@@ -185,9 +185,7 @@ function Blog() {
     }
   }, [isAuthenticated, infoUser, fetchUserInfo]);
 
-  const toggleCollapsed = () => {
-    setCollapsed(!collapsed);
-  };
+;
 
   const tabItems = useMemo(
     () => [

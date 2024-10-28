@@ -21,9 +21,12 @@ import useRoom from "../../hooks/useRoom";
 import { BellOutlined } from "@ant-design/icons";
 import useUserHome from "../../hooks/useUserHome";
 import useFriend from "../../hooks/useFriend";
+import { useTheme } from "../themeLightDark/ThemeProvider"; // Import useTheme
 
 const RoomUser = () => {
   const navigate = useNavigate();
+  const { theme } = useTheme(); // Lấy theme hiện tại từ context
+
   const { isAuthenticated, infoUser, fetchUserInfo } = useAuthen();
   const { fetchGetRoom, listRoom, fetchPutUrl } = useRoom();
   const { getAll, fetchGetAll } = useUserHome();
@@ -36,13 +39,6 @@ const RoomUser = () => {
   const [onlineUsers, setOnlineUsers] = useState([]);
   const [friendRequests, setFriendRequests] = useState([]);
   const [friendRecipients, setFriendRecipients] = useState([]);
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [tasks, setTasks] = useState([
-    "Hoàn thành bài tập lúc 8h",
-    "Cố gắng hoàn thành trước 7h tối",
-  ]);
-  const [currentTask, setCurrentTask] = useState("");
-  const [editIndex, setEditIndex] = useState(null);
 
   useEffect(() => {
     if (isAuthenticated && !infoUser.fullName && userId) {
@@ -235,7 +231,11 @@ const RoomUser = () => {
   return (
     <div className="flex flex-col md:flex-row min-h-screen">
       {/* Sidebar */}
-      <div className="w-full md:w-1/5 bg-white p-5">
+      <div
+        className={`w-full md:w-1/5 p-5 ${
+          theme === "dark" ? "bg-[#282c34] text-white" : "bg-white text-black"
+        }`}
+      >
         <div className="bg-gradient-to-t from-[#C8E2FF] to-white p-4 rounded-lg shadow-md text-center w-full h-90 mt-5">
           <div className="flex justify-center">
             <img src={home} alt="Upgrade Icon" />
