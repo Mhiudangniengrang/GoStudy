@@ -138,7 +138,7 @@ export const Router = () => {
     {
       path: "/admin",
       element:
-        isAuthenticated && infoUser.role === 1 ? (
+        isAuthenticated && infoUser.role === 2 ? (
           <AdminLayout>
             <ScrollToTop>
               <Suspense fallback={<Loading />}>
