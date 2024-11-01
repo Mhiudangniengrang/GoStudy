@@ -278,7 +278,7 @@ const RoomUser = () => {
           <img src={roomImg} alt="Room Image" className="w-full h-48" />
         </div>
 
-        <RoomTask />
+        {(infoUser.role === 3 || infoUser.role === 4) && <RoomTask />}
       </div>
 
       {/* Main Content */}

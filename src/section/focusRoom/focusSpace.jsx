@@ -8,11 +8,13 @@ import {
   PictureOutlined,
 } from "@ant-design/icons";
 import FocusTimer from "./focusTimer";
-import { Button, notification } from "antd";
 import FocusSession from "./focusSession";
 import LazyLoad from "react-lazyload";
+import useAuthen from "../../hooks/useAuthen";
+import Cookies from "js-cookie";
 
 function FocusSpace() {
+  const { isAuthenticated, infoUser, fetchUserInfo } = useAuthen();
   const videoRef = useRef(null);
   const containerRef = useRef(null);
   const audioRef = useRef(null);
@@ -32,23 +34,21 @@ function FocusSpace() {
   const [isLoop, setIsLoop] = useState(false);
   const [isTimerRunning, setIsTimerRunning] = useState(false);
 
-  // Quản lý trạng thái hiển thị cho cả Timer và Goal
   const [showTimer, setShowTimer] = useState(false);
   const [showGoal, setShowGoal] = useState(false);
+  const userId = parseInt(Cookies.get("userId"), 10);
 
-  // Hàm toggle showTimer, đồng thời ẩn showGoal nếu đang mở
   const toggleShowTimer = () => {
     setShowTimer(!showTimer);
     if (!showTimer) {
-      setShowGoal(false); // Ẩn showGoal khi mở showTimer
+      setShowGoal(false);
     }
   };
 
-  // Hàm toggle showGoal, đồng thời ẩn showTimer nếu đang mở
   const toggleShowGoal = () => {
     setShowGoal(!showGoal);
     if (!showGoal) {
-      setShowTimer(false); // Ẩn showTimer khi mở showGoal
+      setShowTimer(false);
     }
   };
   const musicOptions = [
@@ -88,7 +88,11 @@ function FocusSpace() {
       src: "https://storage.googleapis.com/go_study/music/Background3.3%20-%20Made%20with%20Clipchamp.mp4",
     },
   ];
-
+  useEffect(() => {
+    if (isAuthenticated && !infoUser.fullName && userId) {
+      fetchUserInfo(userId);
+    }
+  }, [isAuthenticated, infoUser, fetchUserInfo, userId]);
   const toggleMute = () => {
     if (videoRef.current) {
       videoRef.current.muted = !videoRef.current.muted;
@@ -223,7 +227,12 @@ function FocusSpace() {
               toggleShowTimer={toggleShowTimer}
               showTimer={showTimer}
             />
-            <FocusSession showGoal={showGoal} toggleShowGoal={toggleShowGoal} />
+            {infoUser.role === 4 && (
+              <FocusSession
+                showGoal={showGoal}
+                toggleShowGoal={toggleShowGoal}
+              />
+            )}
           </div>
 
           <button

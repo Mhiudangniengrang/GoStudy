@@ -9,4 +9,19 @@ const postSpecialization = (userId, specializationId) => {
     specializationId
   );
 };
-export { getSpecialization, postSpecialization };
+const getSpecializationAvailable = (userId) => {
+  return axiosClient.get(
+    `/api/Specialization/AvailableSpecializations?userId=${userId}`
+  );
+};
+const putSpecializationAvailable = (userSpecializationId, specializationId) => {
+  return axiosClient.put(
+    `/api/Specialization/UpdateUserSpecialization?userSpecializationId=${userSpecializationId}&specializationId=${specializationId}`
+  );
+};
+export {
+  getSpecialization,
+  postSpecialization,
+  getSpecializationAvailable,
+  putSpecializationAvailable,
+};

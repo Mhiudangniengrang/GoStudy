@@ -7,7 +7,7 @@ function ProfileView() {
 
   return (
     <div
-      className={`min-h-screen p-5 ${
+      className={`min-h-screen p-20 ${
         theme === "dark" ? "bg-[#282c34] text-dark" : "bg-white text-black"
       }`}
     >

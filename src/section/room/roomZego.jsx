@@ -54,7 +54,7 @@ function RoomZego() {
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
-        height: "117vh", // Set height to cover the full viewport
+        height: "100vh", // Set height to cover the full viewport
       }}
     >
       <div id="meeting-container" style={{ height: "100%" }}></div>

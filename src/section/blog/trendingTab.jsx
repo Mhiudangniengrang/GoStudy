@@ -82,10 +82,7 @@ function TrendingTab({ refreshTrending }) {
   };
 
   const handleCommentSubmit = async (postId) => {
-    if (commentCount >= 3) {
-      message.warning("You can only post 3 comments per day.");
-      return;
-    }
+
 
     const commentData = {
       postId,
@@ -158,16 +155,27 @@ function TrendingTab({ refreshTrending }) {
                 <p className="text-lg">{post.content}</p>
                 {post.blogImgs && post.blogImgs.length > 0 && (
                   <div className="grid grid-cols-2 gap-4">
-                    {post.blogImgs.slice(0, 1).map((imgObj) => (
-                      <Image
-                        key={imgObj.blogImgId}
-                        width="100%"
-                        height={300}
-                        src={imgObj.img}
-                        style={{ objectFit: "cover" }}
-                      />
-                    ))}
-                    {post.blogImgs.length > 1 && (
+                    {post.blogImgs
+                      .filter((imgObj) =>
+                        imgObj.img.startsWith(
+                          "https://res.cloudinary.com/dphupjpqt/image/upload/"
+                        )
+                      )
+                      .slice(0, 1)
+                      .map((imgObj) => (
+                        <Image
+                          key={imgObj.blogImgId}
+                          width="100%"
+                          height={300}
+                          src={imgObj.img}
+                          style={{ objectFit: "cover" }}
+                        />
+                      ))}
+                    {post.blogImgs.filter((imgObj) =>
+                      imgObj.img.startsWith(
+                        "https://res.cloudinary.com/dphupjpqt/image/upload/"
+                      )
+                    ).length > 1 && (
                       <div className="relative">
                         <Image
                           key={post.blogImgs[1].blogImgId}
@@ -190,6 +198,7 @@ function TrendingTab({ refreshTrending }) {
                     )}
                   </div>
                 )}
+
                 <div className="flex justify-between text-sm text-gray-500 my-3">
                   <p className="text-sm text-gray-400">
                     {formatDate(post.createdAt)}
@@ -336,15 +345,21 @@ function TrendingTab({ refreshTrending }) {
           width={800}
         >
           <div className="grid grid-cols-2 gap-4">
-            {selectedPost.blogImgs.map((imgObj) => (
-              <Image
-                key={imgObj.blogImgId}
-                width="100%"
-                height={300}
-                src={imgObj.img}
-                style={{ objectFit: "cover" }}
-              />
-            ))}
+            {selectedPost.blogImgs
+              .filter((imgObj) =>
+                imgObj.img.startsWith(
+                  "https://res.cloudinary.com/dphupjpqt/image/upload/"
+                )
+              )
+              .map((imgObj) => (
+                <Image
+                  key={imgObj.blogImgId}
+                  width="100%"
+                  height={300}
+                  src={imgObj.img}
+                  style={{ objectFit: "cover" }}
+                />
+              ))}
           </div>
         </Modal>
       )}

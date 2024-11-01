@@ -63,7 +63,8 @@ function Blog() {
 
     try {
       setLoading(true);
-      const imageUrls = await uploadImages(images);
+      const imageUrls =
+        images.length > 0 ? await uploadImages(images) : ["string"];
 
       const blogData = {
         title: "Sample Title",
@@ -72,11 +73,6 @@ function Blog() {
       };
 
       await fetchPostBlogVip(userId, blogData);
-      notification.success({
-        message: "Create Successful",
-        description: "You have posted successfully.",
-        duration: 2,
-      });
 
       setRefreshTrending((prev) => !prev);
       setRefreshYourBlog((prev) => !prev);
@@ -185,8 +181,6 @@ function Blog() {
     }
   }, [isAuthenticated, infoUser, fetchUserInfo]);
 
-;
-
   const tabItems = useMemo(
     () => [
       {
@@ -259,9 +253,7 @@ function Blog() {
               />
             </div>
             <div className="w-full mb-4">
-              <label className="block mb-2">
-                Add images or provide a string
-              </label>
+              <label className="block mb-2">Add images</label>
               <Upload
                 accept=".jpg,.jpeg,.png"
                 listType="picture-card"

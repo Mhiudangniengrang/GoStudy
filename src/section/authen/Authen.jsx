@@ -28,6 +28,7 @@ function Authen() {
 
   const handleGoogleSuccess = async (credentialResponse) => {
     const token = credentialResponse.credential;
+    console.log("token", token);
     try {
       setIsLoggingIn(true);
       const response = await login(token);

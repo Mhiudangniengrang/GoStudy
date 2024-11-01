@@ -11,6 +11,7 @@ const useAuthen = create((set) => ({
     try {
       const res = await getInfoUser(userId);
       if (res && res.status === 200) {
+        console.log(res.data);
         set({ infoUser: res.data || {} });
       } else if (res.status === 401 || res.status === 403) {
         handleUnauthorized();
@@ -21,9 +22,9 @@ const useAuthen = create((set) => ({
   },
   fetchEditUser: async (userId, userProfile) => {
     try {
-      const res = await updateProfile(userId, userProfile); 
+      const res = await updateProfile(userId, userProfile);
       if (res && res.status === 200) {
-        set({ infoUser: { ...res.data } }); 
+        set({ infoUser: { ...res.data } });
         notification.success({
           message: "Profile Updated",
           description: "Your profile has been updated successfully.",

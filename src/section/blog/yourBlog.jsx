@@ -345,16 +345,27 @@ function YourBlog({ refreshYourBlog }) {
               {/* Image grid */}
               {post.blogImgs && post.blogImgs.length > 0 && (
                 <div className="grid grid-cols-2 gap-4">
-                  {post.blogImgs.slice(0, 1).map((imgObj) => (
-                    <Image
-                      key={imgObj.blogImgId}
-                      width="100%"
-                      height={300}
-                      src={imgObj.img}
-                      style={{ objectFit: "cover" }}
-                    />
-                  ))}
-                  {post.blogImgs.length > 1 && (
+                  {post.blogImgs
+                    .filter((imgObj) =>
+                      imgObj.img.startsWith(
+                        "https://res.cloudinary.com/dphupjpqt/image/upload/"
+                      )
+                    )
+                    .slice(0, 1)
+                    .map((imgObj) => (
+                      <Image
+                        key={imgObj.blogImgId}
+                        width="100%"
+                        height={300}
+                        src={imgObj.img}
+                        style={{ objectFit: "cover" }}
+                      />
+                    ))}
+                  {post.blogImgs.filter((imgObj) =>
+                    imgObj.img.startsWith(
+                      "https://res.cloudinary.com/dphupjpqt/image/upload/"
+                    )
+                  ).length > 1 && (
                     <div className="relative">
                       <Image
                         key={post.blogImgs[1].blogImgId}
@@ -365,7 +376,7 @@ function YourBlog({ refreshYourBlog }) {
                       />
                       {post.blogImgs.length > 2 && (
                         <div
-                          className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center "
+                          className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center"
                           onClick={() => handleImageClick(post)}
                         >
                           <p className="text-white text-2xl font-bold">
@@ -472,15 +483,21 @@ function YourBlog({ refreshYourBlog }) {
           width={800}
         >
           <div className="grid grid-cols-2 gap-4">
-            {selectedPost.blogImgs.map((imgObj) => (
-              <Image
-                key={imgObj.blogImgId}
-                width="100%"
-                height={300}
-                src={imgObj.img}
-                style={{ objectFit: "cover" }}
-              />
-            ))}
+            {selectedPost.blogImgs
+              .filter((imgObj) =>
+                imgObj.img.startsWith(
+                  "https://res.cloudinary.com/dphupjpqt/image/upload/"
+                )
+              )
+              .map((imgObj) => (
+                <Image
+                  key={imgObj.blogImgId}
+                  width="100%"
+                  height={300}
+                  src={imgObj.img}
+                  style={{ objectFit: "cover" }}
+                />
+              ))}
           </div>
         </Modal>
       )}
@@ -507,21 +524,27 @@ function YourBlog({ refreshYourBlog }) {
               <Upload
                 accept=".jpg,.jpeg,.png"
                 listType="picture-card"
-                fileList={images.map((image, index) => {
-                  let url;
-                  if (image instanceof File) {
-                    url = URL.createObjectURL(image);
-                  } else if (image.img) {
-                    url = image.img;
-                  }
+                fileList={images
+                  .filter((image) =>
+                    image.img.startsWith(
+                      "https://res.cloudinary.com/dphupjpqt/image/upload/"
+                    )
+                  )
+                  .map((image, index) => {
+                    let url;
+                    if (image instanceof File) {
+                      url = URL.createObjectURL(image);
+                    } else if (image.img) {
+                      url = image.img;
+                    }
 
-                  return {
-                    uid: index.toString(),
-                    name: image.name || `image-${index}`,
-                    status: "done",
-                    url,
-                  };
-                })}
+                    return {
+                      uid: index.toString(),
+                      name: image.name || `image-${index}`,
+                      status: "done",
+                      url,
+                    };
+                  })}
                 onChange={handleImageUpload}
                 onRemove={(file) => {
                   const newImages = images.filter(

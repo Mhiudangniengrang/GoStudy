@@ -84,7 +84,8 @@ const LandingPageUser = ({ children }) => {
           ))}
         </div>
         <div className="flex items-center space-x-4">
-          <DarkMode />
+          {(infoUser.role === 3 || infoUser.role === 4) && <DarkMode />}
+
           <Dropdown overlay={menu} trigger={["click"]}>
             <Avatar src={avatarUrl} size="large" className="cursor-pointer" />
           </Dropdown>

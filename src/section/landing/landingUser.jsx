@@ -104,15 +104,21 @@ function LandingUser() {
     fetchUserInfo(userId);
   }, [fetchGetSpecialization, fetchUserInfo, userId]);
 
-  const handleConfirm = () => {
-    if (infoUser.specialization.length >= 6) {
-      notification.warning({
-        message: "Room Limit Reached",
-        description: "You have selected 6 rooms. You cannot select more..",
-      });
-      return;
+  const getMaxSelectionByRole = () => {
+    switch (infoUser.role) {
+      case 1:
+        return 2;
+      case 3:
+        return 4;
+      case 4:
+        return 6;
+      default:
+        return 6;
     }
+  };
 
+  const handleConfirm = () => {
+    const maxSelection = getMaxSelectionByRole();
     const existingSpecializations = infoUser.specialization.map((spec) =>
       spec.name.trim()
     );
@@ -120,6 +126,14 @@ function LandingUser() {
     const newMajors = selectedMajors.filter(
       (major) => !existingSpecializations.includes(major.trim())
     );
+
+    if (existingSpecializations.length + newMajors.length > maxSelection) {
+      notification.warning({
+        message: "Selection Limit Reached",
+        description: `You have already selected ${existingSpecializations.length} rooms. You can only select up to ${maxSelection} rooms in total. Upgrade your package if you need more.`,
+      });
+      return;
+    }
 
     if (newMajors.length === 0 && selectedMajors.length > 0) {
       notification.warning({
@@ -133,7 +147,7 @@ function LandingUser() {
     if (selectedMajors.length === 0) {
       notification.warning({
         message: "No Room Selected",
-        description: "Please select at least one rooms.",
+        description: "Please select at least one room.",
       });
       return;
     }

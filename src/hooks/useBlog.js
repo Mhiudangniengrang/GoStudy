@@ -9,6 +9,7 @@ import {
   postLikeBlog,
   putBlogUser,
 } from "../api/blogApi";
+import { notification } from "antd";
 
 const useBlog = create((set) => ({
   blog: [],
@@ -57,12 +58,22 @@ const useBlog = create((set) => ({
     try {
       const response = await postCommentBlog(commentData);
     } catch (error) {
-      console.error(
-        "Error posting comment:",
-        error.response?.data || error.message
-      );
+      if (error.response?.status === 400) {
+        notification.info({
+          message: error.response.data.message,
+          description:
+            "Upgrade your package if you need more." || "Bad Request",
+          duration: 2,
+        });
+      } else {
+        console.error(
+          "Error posting comment:",
+          error.response?.data || error.message
+        );
+      }
     }
   },
+
   fetchPostLike: async (blogId, userId) => {
     try {
       const response = await postLikeBlog(blogId, userId);
@@ -77,14 +88,33 @@ const useBlog = create((set) => ({
   fetchPostBlogVip: async (userid, formData) => {
     try {
       const response = await postBlogUserVip(userid, formData);
+
+      if (response.status === 200) {
+        notification.success({
+          message: "Blog",
+          description: response.data.message,
+          duration: 2,
+        });
+      }
+
       console.log("BlogVip posted successfully:", response.data);
     } catch (error) {
-      console.error(
-        "Error posting blog:",
-        error.response?.data || error.message
-      );
+      if (error.response?.status === 400) {
+        notification.info({
+          message: error.response.data.message,
+          description:
+            "Upgrade your package if you need more." || "Bad Request",
+          duration: 2,
+        });
+      } else {
+        console.error(
+          "Error posting BlogVip:",
+          error.response?.data || error.message
+        );
+      }
     }
   },
+
   fetchUpdateUser: async (postId, data) => {
     try {
       const response = await putBlogUser(postId, data);
