@@ -34,6 +34,7 @@ const ProfileUser = () => {
   const userName = userProfile.fullName || "User Name";
   const email = infoUser.email || "Not Available";
   const semesterName = infoUser.semester?.name || "Not Available";
+  const userId = Cookies.get("userId");
 
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isSpecializationModalVisible, setIsSpecializationModalVisible] =
@@ -46,7 +47,6 @@ const ProfileUser = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const userId = Cookies.get("userId");
     fetchGetSpecializationAvailable(userId);
     if (isAuthenticated && !infoUser.fullName && userId) {
       fetchUserInfo(userId);
@@ -90,7 +90,6 @@ const ProfileUser = () => {
 
   const handleUpdate = async () => {
     setLoading(true);
-    const userId = Cookies.get("userId");
 
     try {
       let imageUrl = userProfile.profileImage;
@@ -149,8 +148,6 @@ const ProfileUser = () => {
 
   const handleSpecializationUpdate = async () => {
     if (!selectedSpecializationId || !selectedUserSpecializationId) return;
-    const userId = Cookies.get("userId");
-
     try {
       await fetchPutSpecialization(
         selectedUserSpecializationId,
