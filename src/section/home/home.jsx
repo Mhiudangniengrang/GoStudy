@@ -1,13 +1,6 @@
 import React, { useEffect, useState } from "react";
 import * as signalR from "@microsoft/signalr";
-import {
-  Image,
-  Calendar,
-  theme,
-  Button,
-  notification,
-  Avatar,
-} from "antd";
+import { Image, Calendar, theme, Button, notification, Avatar } from "antd";
 import { Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -20,10 +13,7 @@ import {
 } from "chart.js";
 import home from "../assets/account/home.png";
 import dayjs from "dayjs";
-import {
-  EditOutlined,
-  FileTextOutlined,
-} from "@ant-design/icons";
+import { EditOutlined, FileTextOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import useTask from "../../hooks/useTask";
@@ -56,9 +46,13 @@ function Home() {
   const userIdd = parseInt(Cookies.get("userId"), 10);
 
   useEffect(() => {
-    fetchGetTaskToday(userId);
-    fetchUserInfo(userId);
-    fetchGetUserHome(userId);
+    if (userId) {
+      fetchGetTaskToday(userId);
+      fetchUserInfo(userId);
+      fetchGetUserHome(userId);
+    } else {
+      console.error("userId is undefined");
+    }
   }, [fetchGetTaskToday, fetchUserInfo, userId]);
 
   const wrapperStyle = {
@@ -75,7 +69,7 @@ function Home() {
       userHome.attendances.forEach((attendance) => {
         const dayIndex = dayjs(attendance.date).day() - 1;
         if (dayIndex >= 0 && dayIndex < 6) {
-          timeActive[dayIndex] += attendance.hours || 1; 
+          timeActive[dayIndex] += attendance.hours || 1;
         }
       });
     }
@@ -118,8 +112,6 @@ function Home() {
   };
 
   const today = new Date();
-
-
 
   const formatDate = (date) => {
     return dayjs(date).format("Do MMM, YYYY");
@@ -174,7 +166,7 @@ function Home() {
   };
   useEffect(() => {
     const connection = new signalR.HubConnectionBuilder()
-      .withUrl("https://gostudy-be.arisavinh.dev/userStatusHub") 
+      .withUrl("https://gostudy-be.arisavinh.dev/userStatusHub")
       .withAutomaticReconnect()
       .build();
 
@@ -185,7 +177,7 @@ function Home() {
         await connection.invoke("ConnectWithUserId", userIdd);
 
         connection.on("ReceiveOnlineUsers", (onlineUserIds) => {
-          setOnlineUsers(onlineUserIds); 
+          setOnlineUsers(onlineUserIds);
         });
 
         await connection.invoke("GetOnlineUsers");
