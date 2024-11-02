@@ -2,7 +2,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 const axiosClient = axios.create({
-  baseURL: "https://go-study-chi.vercel.app",
+  baseURL: "https://gostudy-be.arisavinh.dev",
 });
 
 axiosClient.interceptors.request.use(async (config) => {
