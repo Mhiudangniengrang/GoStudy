@@ -353,17 +353,20 @@ function Home() {
                       ? dayjs(userHome.blogPost.createdAt).format(
                           "MMM D, YYYY h:mm A"
                         )
-                      : "No blog post"}
+                      : "You have no blog posts."}
                   </span>
                 </div>
               </div>
-              <div className="flex flex-col items-center justify-center w-[7rem] h-20">
-                {userHome.blogPost && userHome.blogPost.image && (
+
+              <div className="flex flex-col items-center justify-center w-[7rem] h-15">
+                {userHome.blogPost && userHome.blogPost.image ? (
                   <img
                     src={userHome.blogPost.image}
                     alt="Blog"
                     className="mt-2 rounded"
                   />
+                ) : (
+                  <div className="w-full h-full border-2 border-dashed border-gray-300 rounded flex items-center justify-center"></div>
                 )}
               </div>
             </div>

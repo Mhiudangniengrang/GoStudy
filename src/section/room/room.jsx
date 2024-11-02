@@ -446,7 +446,7 @@ const RoomUser = () => {
                       />
                       <div className="ml-2 flex flex-col">
                         <div className="flex items-center">
-                          <span className="font-bold text-base">
+                          <span className="font-bold text-md">
                             {user.fullName}
                           </span>
                           <span className="ml-2 w-3 h-3 rounded-full bg-green-500"></span>
