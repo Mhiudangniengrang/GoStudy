@@ -43,17 +43,15 @@ function Home() {
   const { token } = theme.useToken();
   const { taskToday, fetchGetTaskToday } = useTask();
   const userId = Cookies.get("userId");
-  const userIdd = parseInt(Cookies.get("userId"), 10);
+  const userIdd = userId ? parseInt(userId, 10) : null;
 
   useEffect(() => {
-    if (userId) {
-      fetchGetTaskToday(userId);
-      fetchUserInfo(userId);
-      fetchGetUserHome(userId);
-    } else {
-      console.error("userId is undefined");
+    if (userIdd) {
+      fetchGetTaskToday(userIdd);
+      fetchUserInfo(userIdd);
+      fetchGetUserHome(userIdd);
     }
-  }, [fetchGetTaskToday, fetchUserInfo, userId]);
+  }, [fetchGetTaskToday, fetchUserInfo, fetchGetUserHome, userIdd]);
 
   const wrapperStyle = {
     width: 350,
@@ -165,6 +163,8 @@ function Home() {
     }
   };
   useEffect(() => {
+    if (!userIdd) return;
+
     const connection = new signalR.HubConnectionBuilder()
       .withUrl("https://gostudy-be.arisavinh.dev/userStatusHub")
       .withAutomaticReconnect()
@@ -173,7 +173,6 @@ function Home() {
     const startConnection = async () => {
       try {
         await connection.start();
-
         await connection.invoke("ConnectWithUserId", userIdd);
 
         connection.on("ReceiveOnlineUsers", (onlineUserIds) => {
@@ -195,13 +194,14 @@ function Home() {
           console.error("Error stopping SignalR connection:", error)
         );
     };
-  }, [userId]);
+  }, [userIdd]);
 
   const isUserOnline = (userId) => {
     return onlineUsers.includes(userId.toString());
   };
-  const friendIds =
-    userHome?.listFriend?.map((friend) => friend.myFriend.userId) || [];
+  const friendIds = userHome?.listFriend
+    ? userHome.listFriend.map((friend) => friend.myFriend?.userId)
+    : [];
 
   return (
     <div className="flex flex-col items-center space-y-6 mb-5">
