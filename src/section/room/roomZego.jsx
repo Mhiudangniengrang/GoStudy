@@ -14,8 +14,8 @@ function RoomZego() {
   const { roomName } = location.state || {};
 
   useEffect(() => {
-    const appId = 1614184009;
-    const serverSecret = "c42344d0535d67ca2c28c13f4a4ac72a";
+    const appId = 1944943474;
+    const serverSecret = "e68f78792c5faebf71259e7b96565e1d";
     const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(
       appId,
       serverSecret,
